@@ -9,6 +9,9 @@ services:
         target: /usr/share/elasticsearch/config/jvm.options
     networks:
       - esnet
+    sysctls:
+      - vm.max_map_count=262144
+    
     ports:
       - target: 9200
         published: 9200
@@ -29,6 +32,8 @@ services:
          target: /usr/share/elasticsearch/config/jvm.options
     networks:
       - esnet
+    sysctls:
+      - vm.max_map_count=262144
     deploy:
       endpoint_mode: dnsrr
       mode: 'replicated'
@@ -47,6 +52,8 @@ services:
       - esnet
     volumes:
       - esdata1:/usr/share/elasticsearch/data
+    sysctls:
+      - vm.max_map_count=262144
     deploy:
       placement:
        constraints: [node.hostname == node-1]
@@ -67,6 +74,8 @@ services:
       - esnet
     volumes:
       - esdata2:/usr/share/elasticsearch/data
+    sysctls:
+      - vm.max_map_count=262144
     deploy:
       placement:
         constraints: [node.hostname == node-2]
@@ -87,6 +96,8 @@ services:
       - esnet
     volumes:
       - esdata3:/usr/share/elasticsearch/data
+    sysctls:
+      - vm.max_map_count=262144
     deploy:
       placement:
         constraints: [node.hostname == node-3]
@@ -107,6 +118,8 @@ services:
        - esnet
     volumes:
       - esdata4:/usr/share/elasticsearch/data
+    sysctls:
+      - vm.max_map_count=262144
     deploy:
       placement:
         constraints: [node.hostname == node-4]
